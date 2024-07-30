@@ -1,16 +1,28 @@
+"use client";
 import Navbar from "@/components/Navbar";
-
+import { useState,useEffect } from "react";
 export default function Blogpost({ params }) {
+  const [blog, setBlog] = useState();
+  const slug=params.slug;
+  const fectchBlog = async () => {
+      const parsed = await fetch(`http://localhost:3000/api/getblogs?slug=${slug}`);
+      const data=await parsed.json();
+      setBlog(data);
+  }
+
+  useEffect(()=>{
+    if(slug.length>0)
+    fectchBlog();
+  },[]);
+
   return (<>
     <Navbar />
-    <div className="main flex justify-center">
-      <div className="container flex flex-col items-center border-2 border-black mt-6 w-7/12">
-        <h1 className="text-4xl font-bold">Title for the blog {params.slug}</h1>
+    {blog && <div className="main flex justify-center">
+      <div className="container flex flex-col items-center border-2 border-black mt-6 w-7/12 p-4">
+        <h1 className="text-4xl font-bold mb-3">{blog.title}</h1>
         <hr className="border-2 border-black w-full" />
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum deleniti expedita similique dolorum autem soluta atque ut rerum onsequatur esse corporis nemo inventore, nesciunt odio nulla perferendis eveniet nam officia?
-          Magni cum explicabo, aliquam molestias mollitia ipsam repellendus vel nobis quasi, sed eos praesentium officia doloribus cupiditate alias! Deleniti at possimus id reiciendis cumque sit saepe distinctio, et totam esse.
-          Delectus sequi voluptatem aut repellat? Voluptatibus magnam voluptatum unde nisi? Blanditiis incidunt aperiam maiores non possimus atque nisi, ut id eveniet amet quasi doloremque fugit sunt quaerat unde! Voluptates, aliquid.</p>
+        <p className="m-2 text-justify">{blog.description}</p>
       </div>
-    </div>
+    </div>}
   </>)
 }

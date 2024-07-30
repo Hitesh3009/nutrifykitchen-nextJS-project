@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 export async function GET(req) {
     try {
-        const slug=req.nextUrl.searchParams.get('slug');
+        const slug = req.nextUrl.searchParams.get('slug');
         const res = await fs.readFile(`./blogdata/${slug}.json`, 'utf-8')
         const data = new Response(res, {
             headers: {

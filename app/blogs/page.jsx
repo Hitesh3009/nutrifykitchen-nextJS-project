@@ -8,9 +8,7 @@ const BlogsPage = () => {
   const [blog, setBlog] = useState([]);
   const fectchBlog = async () => {
     const parsed = await fetch('../api/blogs');
-    console.log(parsed);
     const data = await parsed.json();
-    console.log(data);
     setBlog(data);
   }
 
