@@ -1,35 +1,16 @@
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
-import {promises as fs } from 'fs';
-export async function getBlogsFromServer() {
-  const res = await fetch('http://localhost:3000/api/blogs', {
-    method: 'GET'
-  });
-  const data = res.json();
 
-  return data;
+export async function getBlogsFromServer(){
+    const res= await fetch('http://localhost:3000/api/blogs',{
+      method: 'GET'
+    });
+    const data=res.json();
+    
+    return data;
 }
-
-export async function getBlogsInStaticPage() {
-  try {
-    const res = await fs.readdir('./blogdata', 'utf-8');
-    let allBlogs = [];
-    let myfile;
-    for (let index = 0; index < res.length; index++) {
-      const item = res[index];
-      myfile = await fs.readFile(('./blogdata/' + item), 'utf-8');
-      allBlogs.push(JSON.parse(myfile));
-    }
-    return allBlogs;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-}
-const BlogsPage = async () => {
-  // const allBlogs = await getBlogsFromServer();
-  const allBlogs = await getBlogsInStaticPage();
-  // console.log(allBlogs);
+const BlogsPage = async() => {
+    const allBlogs= await getBlogsFromServer();
   return (
     <>
       <Navbar />
