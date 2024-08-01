@@ -13,7 +13,7 @@ export default async function Blogpost({ params }) {
   console.log(myBlog);
   return (<>
 
-    <div className="flex flex-col h-screen bg-black text-white">
+    <div className="flex flex-col h-screen">
       {myBlog.error ? (<>
         <div className="flex flex-grow">
           <p className="font-bold text-4xl m-auto">{myBlog.status} {myBlog.error} :(</p>

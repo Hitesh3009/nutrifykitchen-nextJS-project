@@ -3,8 +3,8 @@ export async function POST(req) {
     try {
         const objdata = await req.json();
         const body=JSON.stringify(objdata);
-        fs.writeFile(`./contactdata/${objdata.email}.json`,body);
-        const data=await fs.readdir('./contactdata');
+        fs.appendFile(`./contactdata/${objdata.email}.json`,body+',\n');
+        const file=await fs.readdir('./contactdata');
         return new Response(body, {
             headers: { 'Content-Type': 'application/json' },
             status: 200
