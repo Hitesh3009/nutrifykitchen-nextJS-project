@@ -1,10 +1,11 @@
 import Navbar from "@/components/Navbar";
 
-export async function getMyBlog(slug) {
-  const res = await fetch(`http://localhost:3000/api/getblogs?slug=${slug}`, {
+export async function getMyBlog() {
+  const jsondata = await fetch(`http://localhost:3000/api/getblogs`, {
     method: 'GET'
   });
-  const data = res.json();
+  // console.log(jsondata);
+  const data = await jsondata.json();
   return data;
 }
 export default async function Blogpost({ params }) {
