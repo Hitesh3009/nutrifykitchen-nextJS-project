@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-// const fs=require('fs');
 const Allblogs = () => {
     const [query, setquery] = useState('');
     const [cuisine, setcuisine] = useState('Indian');
@@ -11,21 +10,32 @@ const Allblogs = () => {
     const cuisineArr = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe', 'Chinese', 'Eastern Europe', 'French', 'Indian', 'Italian', 'Japanese', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'South American', 'South East Asian']
     const fetchRecipes = async () => {
         try {
-            const res = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&cuisineType=${cuisine}&app_id=${app_id}&app_key=${app_key}`);
-            const dataObj = await res.json();
+            const req = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&cuisineType=${cuisine}&app_id=${app_id}&app_key=${app_key}`);
+            const dataObj = await req.json();
             console.log(dataObj.hits);
             setrecipeData(dataObj.hits);
+            await saveRecipes(dataObj.hits);
             console.log(dataObj.hits);
             if (dataObj.hits.length === 0)
                 setisDataFound(true);
-            else
+            else    
                 setisDataFound(false);
-
-            // const jsonData = JSON.stringify(dataObj, null, 4);
-            // fs.promises.writeFile('./blogdata/recipes.json', jsonData);
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const saveRecipes=async(recipes)=>{
+        try {
+            const req=await fetch('/api/blogs',{
+                method: 'POST',
+                headers:{'Content-Type': 'application/json'},
+                body:JSON.stringify({data:recipes})
+            });
+        } catch (err) {
+            return JSON.stringify({error:'Some error occurred while saving recipes'});
+        }
+
     }
     const getUserQuery = (e) => {
         if (e.target.value === '')

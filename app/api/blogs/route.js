@@ -1,14 +1,10 @@
 import { promises as fs } from 'fs';
-const app_key = 'd9bbd69b35f8f302f6953af554b647ba%09';
-const app_id = '41e85f0c';
-export async function GET(req) {
+export async function POST(req) {
     try {
-        const user_query=req.nextUrl.searchParams.get('q');
-        const res = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${user_query}&app_id=${app_id}&app_key=${app_key}`);
-        const dataObj = await res.json();
-        const jsonData=JSON.stringify(dataObj, null, 4);
-        fs.writeFile('./blogdata/recipes.json', jsonData);
-        return new Response(jsonData, {
+        const data=await req.json();
+        const filePath='blogdata/recipes.json';
+        fs.writeFile(filePath,JSON.stringify(data,null,4));
+        return new Response('Write Successful to recipes.json', {
             headers: { 'Content-Type': 'application/json' },
             status: 200
         });
