@@ -2,24 +2,34 @@
 import React, { useEffect, useState } from 'react';
 // const fs=require('fs');
 const Allblogs = () => {
-    const app_key = 'd9bbd69b35f8f302f6953af554b647ba%09';
-    const app_id = '41e85f0c';
-    const cuisineArr = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe', 'Chinese', 'Eastern Europe', 'French', 'Indian', 'Italian', 'Japanese', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'South American', 'South East Asian']
     const [query, setquery] = useState('');
     const [cuisine, setcuisine] = useState('Indian');
     const [recipeData, setrecipeData] = useState([]);
+    const [isDataFound, setisDataFound] = useState(false);
+    const app_key = 'd9bbd69b35f8f302f6953af554b647ba%09';
+    const app_id = '41e85f0c';
+    const cuisineArr = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe', 'Chinese', 'Eastern Europe', 'French', 'Indian', 'Italian', 'Japanese', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'South American', 'South East Asian']
     const fetchRecipes = async () => {
-        const res = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&cuisineType=${cuisine}&app_id=${app_id}&app_key=${app_key}`);
-        const dataObj = await res.json();
-        console.log(dataObj.hits);
-        setrecipeData(dataObj.hits);
-        console.log(dataObj.hits);
-        // const jsonData = JSON.stringify(dataObj, null, 4);
-        // fs.promises.writeFile('./blogdata/recipes.json', jsonData);
+        try {
+            const res = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&cuisineType=${cuisine}&app_id=${app_id}&app_key=${app_key}`);
+            const dataObj = await res.json();
+            console.log(dataObj.hits);
+            setrecipeData(dataObj.hits);
+            console.log(dataObj.hits);
+            if (dataObj.hits.length === 0)
+                setisDataFound(true);
+            else
+                setisDataFound(false);
+
+            // const jsonData = JSON.stringify(dataObj, null, 4);
+            // fs.promises.writeFile('./blogdata/recipes.json', jsonData);
+        } catch (err) {
+            console.log(err);
+        }
     }
     const getUserQuery = (e) => {
         if (e.target.value === '')
-            setquery();
+            setquery('');
         else
             setquery((e.target.value).substr(0, 1).toUpperCase() + (e.target.value).substr(1, e.target.value.length + 1).toLowerCase());
     }
@@ -30,7 +40,7 @@ const Allblogs = () => {
 
     useEffect(() => {
         fetchRecipes();
-    }, [query,cuisine]);
+    }, [query, cuisine]);
     return (
         <>
             <div className="blogs flex flex-col items-center flex-wrap space-x-5 space-y-3 p-5">
@@ -53,26 +63,40 @@ const Allblogs = () => {
                             }
                         </select>
                     </div>}
-                    {/* <button className='bg-gray-700 text-white px-4 py-2 rounded-lg'>Search</button> */}
                 </form>
-                {/* {
-                    allBlogs.length > 0 && allBlogs.map((blogItem) => {
-                        return (<div className="blogsItems border-2 border-black p-5 w-5/12 h-40" key={blogItem.slug}>
-                            <div>
-                                <Link href={`blogpost/${blogItem.slug}`}><h4 className="text-lg font-bold cursor-pointer">{blogItem.title}</h4></Link>
-                                <p>{blogItem.description.substr(0, 155) + '.....'}</p>
-                            </div>
-                        </div>);
-                    })
-                } */}
             </div>
-            {
-                recipeData && recipeData.map((item, index) => {
-                    return ((<div className='flex border-2 border-black'>
-                        <img src={item.recipe.image} alt="" />
-                    </div>))
-                })
-            }
+            <div className='flex flex-wrap justify-evenly p-3'>
+                {
+                    (recipeData && !isDataFound) ? recipeData.map((item, index) => {
+                        return (<>
+                            <div className='card border-2 border-black w-[21%] h-[52vh] mb-5 flex flex-col items-center pt-5 '>
+                                <div className='recipeimg w-10/12 h-[52%]'>
+                                    <img src={item.recipe.image} alt='Recipe Image' className='w-full h-full' />
+                                </div>
+                                <div className='flex w-10/12 flex-grow'>
+                                    <span className='text-sm font-light w-full justify-start'>{item.recipe.label}</span>
+                                </div>
+                                <div className="recipeInfo w-10/12 mb-1">
+                                    <hr className='border-2 border-gray-300 w-full' />
+                                    <div className='flex justify-center p-3'>
+                                        <span className='relative right-5'>Calories:{Math.round(item.recipe.calories)}</span>
+                                        <span>&nbsp;|&nbsp;</span>
+                                        <span className='relative left-5'>Ingredients:{item.recipe.ingredients.length}</span>
+                                    </div>
+                                    <hr className='border-2 border-gray-300 w-full' />
+                                </div>
+                                <div className="recipeSource mb-2">
+                                    <span className='hover:text-green-500 cursor-pointer'>{item.recipe.source}</span>
+                                </div>
+                            </div>
+                        </>)
+                    }) : (<>
+                        <div className='flex items-center justify-center mt-16'>
+                            <p className='font-bold text-2xl'>No Recipe found</p>
+                        </div>
+                    </>)
+                }
+            </div>
         </>
     )
 }
