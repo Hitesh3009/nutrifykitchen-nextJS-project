@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 const Allblogs = () => {
     const [query, setquery] = useState('');
@@ -77,14 +78,15 @@ const Allblogs = () => {
             </div>
             <div className='flex flex-wrap justify-evenly p-3'>
                 {
+                    
                     (recipeData && !isDataFound) ? recipeData.map((item, index) => {
                         return (<>
                             <div className='card border-2 border-black w-[21%] h-[52vh] mb-5 flex flex-col items-center pt-5 '>
-                                <div className='recipeimg w-10/12 h-[52%]'>
+                                <div className='recipeimg w-10/12 h-[52%]' key={index}>
                                     <img src={item.recipe.image} alt='Recipe Image' className='w-full h-full' />
                                 </div>
                                 <div className='flex w-10/12 flex-grow'>
-                                    <span className='text-sm font-light w-full justify-start'>{item.recipe.label}</span>
+                                    <Link href={`/blogpost/${item.recipe.label.split(' ').join('-')}`}><span className='text-sm font-light w-full justify-start'>{item.recipe.label}</span></Link>
                                 </div>
                                 <div className="recipeInfo w-10/12 mb-1">
                                     <hr className='border-2 border-gray-300 w-full' />

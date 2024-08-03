@@ -2,8 +2,10 @@ import { promises as fs } from 'fs';
 export async function GET(req) {
     try {
         const slug = req.nextUrl.searchParams.get('slug');
-        const res = await fs.readFile(`./blogdata/${slug}.json`, 'utf-8')
-        const data = new Response(res, {
+        const res=await fs.readFile(process.cwd()+'/blogdata/recipes.json','utf8');
+        const parsed=await JSON.parse(re);
+        const arrdata=parsed.data
+        const data = new Response(arrdata, {
             headers: {
                 'Content-Type': 'application/json',
                 status: 200
