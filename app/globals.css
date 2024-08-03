@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.input_bottom_line{
+   @apply w-80 outline-none border-2 border-b-black focus:transition focus:delay-300 focus:border-b-[3px] focus:border-b-violet-500
+}
