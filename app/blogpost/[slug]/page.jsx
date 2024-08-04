@@ -27,11 +27,11 @@ export default async function Blogpost({ params }) {
           <Navbar />
 
           <div className="main flex justify-center flex-col items-center space-y-4">
-            <div className="container flex justify-start mt-6 w-10/12 md:w-10/12 xl:w-6/12 lg:w-7/12 p-4 border-2 border-gray-400">
-              <div className="Imgcontainer border-2 border-black relative w-44 h-44 md:w-48 md:h-48 lg:w-52 lg:h-52 flex">
+            <div className="container flex flex-col items-center md:items-stretch md:flex-row md:justify-start mt-6 w-10/12 md:w-10/12 xl:w-6/12 lg:w-7/12 p-4 border-2 border-gray-400">
+              <div className="Imgcontainer border-2 border-black relative w-56 h-44 md:w-48 md:h-48 lg:w-52 lg:h-52 flex">
                 <Image src={blogImg} fill />
               </div>
-              <div className="source absolute right-[11%] md:right-[14%] lg:right-[27%] flex flex-col ">
+              <div className="source relative md:absolute right-[-5%] md:right-[14%] lg:right-[27%] flex flex-col">
                 <span className=" text-xs xl:text-xl md:text-sm lg:text-base text-green-600">{myBlog.source}</span>
                 <span>
                   See full recipe on:
@@ -43,7 +43,7 @@ export default async function Blogpost({ params }) {
                   </a>
                 </span>
               </div>
-              <div className="flex flex-col justify-center relative right-[-6%] top-[15%] md:right-[-13%] md:top-[20%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[25%]">
+              <div className="flex flex-col justify-center relative right-[-6%] top-[2%] md:right-[-13%] md:top-[20%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[25%]">
                 <div className="flex flex-wrap w-[51vw] md:w-[47vw] xl:w-[30vw] lg:w-[35vw]">
                   {
                     myBlog.healthLabels.map((val, index) => {
