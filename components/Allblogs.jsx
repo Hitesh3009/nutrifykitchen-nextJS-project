@@ -5,39 +5,44 @@ const Allblogs = () => {
     const [query, setquery] = useState('');
     const [cuisine, setcuisine] = useState('Indian');
     const [recipeData, setrecipeData] = useState([]);
-    const [isDataFound, setisDataFound] = useState(false);
+    const [isDataEmpty, setisDataEmpty] = useState(false);
+    const [slug, setslug] = useState('');
     const app_key = 'd9bbd69b35f8f302f6953af554b647ba%09';
     const app_id = '41e85f0c';
-    const cuisineArr = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe', 'Chinese', 'Eastern Europe', 'French', 'Indian', 'Italian', 'Japanese', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'South American', 'South East Asian']
+    const cuisineArr = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe', 'Chinese', 'Eastern Europe', 'French', 'Italian', 'Japanese', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'South American', 'South East Asian']
     const fetchRecipes = async () => {
         try {
-            const req = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&cuisineType=${cuisine}&app_id=${app_id}&app_key=${app_key}`);
-            const dataObj = await req.json();
+            const res = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&cuisineType=${cuisine}&app_id=${app_id}&app_key=${app_key}`);
+            const dataObj = await res.json();
             console.log(dataObj.hits);
             setrecipeData(dataObj.hits);
-            await saveRecipes(dataObj.hits);
             console.log(dataObj.hits);
-            if (dataObj.hits.length === 0)
-                setisDataFound(true);
-            else    
-                setisDataFound(false);
+            if (dataObj.hits.length === 0) {
+                setisDataEmpty(true);
+            } else {
+                setisDataEmpty(false);
+                const recipesWithSlug = dataObj.hits.map(item => ({
+                    recipe: item.recipe,
+                    slug: item.recipe.label.replace(/[ ,:;]+/g, '-')
+                }));
+                await saveRecipes(recipesWithSlug);
+            }
         } catch (err) {
             console.log(err);
         }
     }
-
-    const saveRecipes=async(recipes)=>{
+    const saveRecipes = async (recipes) => {
         try {
-            const req=await fetch('/api/blogs',{
+            const res = await fetch('/api/blogs', {
                 method: 'POST',
-                headers:{'Content-Type': 'application/json'},
-                body:JSON.stringify({data:recipes})
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(recipes)
             });
         } catch (err) {
-            return JSON.stringify({error:'Some error occurred while saving recipes'});
+            console.log('Some error occurred while saving recipes:', err);
         }
+    };
 
-    }
     const getUserQuery = (e) => {
         if (e.target.value === '')
             setquery('');
@@ -64,7 +69,7 @@ const Allblogs = () => {
                     {query && <div className='flex flex-col text-center'>
                         <label htmlFor="recipe" className='text-xl font-bold'>Cuisine Type</label>
                         <select name="cuisineType" onChange={getUserCuisine} className='w-[20vw] outline-none border-2 border-black rounded-md h-9'>
-                            <option disabled selected>Select Cuisine Type</option>
+                            <option selected>Indian</option>
                             {
                                 cuisineArr.map((val, index) => {
                                     return (<>
@@ -79,10 +84,10 @@ const Allblogs = () => {
             <div className='flex flex-wrap justify-evenly p-3'>
                 {
                     
-                    (recipeData && !isDataFound) ? recipeData.map((item, index) => {
+                    (recipeData && !isDataEmpty) ? recipeData.map((item, index) => {
                         return (<>
-                            <div className='card border-2 border-black w-[21%] h-[52vh] mb-5 flex flex-col items-center pt-5 '>
-                                <div className='recipeimg w-10/12 h-[52%]' key={index}>
+                            <div className='card border-2 border-black w-[21%] h-[52vh] mb-5 flex flex-col items-center pt-5 'key={index}>
+                                <div className='recipeimg w-10/12 h-[52%]'>
                                     <img src={item.recipe.image} alt='Recipe Image' className='w-full h-full' />
                                 </div>
                                 <div className='flex w-10/12 flex-grow'>
