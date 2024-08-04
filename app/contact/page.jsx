@@ -36,10 +36,10 @@ const ContactPage = () => {
     return (
         <>
             <Navbar />
-            <div className='outerContainer flex items-center justify-center pt-12'>
-                <form className='innerContainer border-2 border-gray-400 px-16 py-8' onSubmit={handleContactSubmit}>
+            <div className='outerContainer flex items-center justify-center pt-5 md:pt-12'>
+                <form className='innerContainer border-2 border-gray-400 px-8 md:px-16 py-4 md:py-8 ' onSubmit={handleContactSubmit}>
                     <div className="contactDetails flex flex-col space-y-2">
-                        <h1 className='font-bold text-3xl text-center'>Contact Us</h1>
+                        <h1 className='font-bold text-xl md:text-3xl text-center'>Contact Us</h1>
                         <hr className='border-2 border-gray-500'/>
                         <p></p>
                         <label htmlFor="name">Name</label>
