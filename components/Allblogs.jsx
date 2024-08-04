@@ -6,7 +6,6 @@ const Allblogs = () => {
     const [cuisine, setcuisine] = useState('Indian');
     const [recipeData, setrecipeData] = useState([]);
     const [isDataEmpty, setisDataEmpty] = useState(false);
-    const [slug, setslug] = useState('');
     const app_key = 'd9bbd69b35f8f302f6953af554b647ba%09';
     const app_id = '41e85f0c';
     const cuisineArr = ['American', 'Asian', 'British', 'Caribbean', 'Central Europe', 'Chinese', 'Eastern Europe', 'French', 'Italian', 'Japanese', 'Kosher', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'South American', 'South East Asian']
@@ -26,6 +25,7 @@ const Allblogs = () => {
                     slug: item.recipe.label.replace(/[ ,:;]+/g, '-')
                 }));
                 await saveRecipes(recipesWithSlug);
+                await postRecipe();
             }
         } catch (err) {
             console.log(err);
@@ -38,11 +38,21 @@ const Allblogs = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(recipes)
             });
+            if (!res.ok) {
+                throw new Error('Failed to save recipes'); // Added error handling
+            }
         } catch (err) {
             console.log('Some error occurred while saving recipes:', err);
         }
     };
-
+    const postRecipe=async()=>{
+        const res= await fetch('api/postblog',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'}
+        });
+        const data=await res.json();
+        return data;
+    }
     const getUserQuery = (e) => {
         if (e.target.value === '')
             setquery('');
@@ -51,12 +61,13 @@ const Allblogs = () => {
     }
     const getUserCuisine = (e) => {
         setcuisine((e.target.value).substr(0, e.target.value.length + 1).toLowerCase());
-        console.log(cuisine);
     }
 
     useEffect(() => {
         fetchRecipes();
     }, [query, cuisine]);
+
+
     return (
         <>
             <div className="blogs flex flex-col items-center flex-wrap space-x-5 space-y-3 p-5">
@@ -91,7 +102,7 @@ const Allblogs = () => {
                                     <img src={item.recipe.image} alt='Recipe Image' className='w-full h-full' />
                                 </div>
                                 <div className='flex w-10/12 flex-grow'>
-                                    <Link href={`/blogpost/${item.recipe.label.split(' ').join('-')}`}><span className='text-sm font-light w-full justify-start'>{item.recipe.label}</span></Link>
+                                    <Link href={`/blogpost/${item.recipe.label.replace(/[ ,:;]+/g, '-')}`}><span className='text-sm font-light w-full justify-start'>{item.recipe.label}</span></Link>
                                 </div>
                                 <div className="recipeInfo w-10/12 mb-1">
                                     <hr className='border-2 border-gray-300 w-full' />
