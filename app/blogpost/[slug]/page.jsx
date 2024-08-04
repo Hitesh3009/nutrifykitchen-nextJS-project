@@ -31,12 +31,20 @@ export default async function Blogpost({ params }) {
               <div className="Imgcontainer border-2 border-black relative w-44 h-44 md:w-48 md:h-48 lg:w-52 lg:h-52 flex">
                 <Image src={blogImg} fill />
               </div>
-              <div className="source absolute right-[11%] md:top-[20%] lg:top-[22%] md:right-[14%] lg:right-[27%] flex flex-col ">
+              <div className="source absolute right-[11%] md:right-[14%] lg:right-[27%] flex flex-col ">
                 <span className=" text-xs xl:text-xl md:text-sm lg:text-base text-green-600">{myBlog.source}</span>
-                <span className="text-xs md:text-sm">See full recipe on : <a href={myBlog.url} className="hover:underline cursor-pointer">{myBlog.source}</a></span>
+                <span>
+                  See full recipe on:
+                  <a
+                    href={myBlog.url}
+                    className="text-xs md:text-base"
+                  style={{cursor:'pointer',color:"blue"}}>
+                    {myBlog.source}
+                  </a>
+                </span>
               </div>
-              <div className="flex flex-col justify-center relative right-[-6%] top-[7%] md:right-[-13%] md:top-[20%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[25%]">
-                <div className="flex flex-wrap w-[50vw] md:w-[47vw] xl:w-[30vw] lg:w-[35vw]">
+              <div className="flex flex-col justify-center relative right-[-6%] top-[15%] md:right-[-13%] md:top-[20%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[25%]">
+                <div className="flex flex-wrap w-[51vw] md:w-[47vw] xl:w-[30vw] lg:w-[35vw]">
                   {
                     myBlog.healthLabels.map((val, index) => {
                       return (<>
