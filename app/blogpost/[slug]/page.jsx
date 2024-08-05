@@ -43,7 +43,7 @@ export default async function Blogpost({ params }) {
                   </a>
                 </span>
               </div>
-              <div className="flex flex-col justify-center relative right-[-6%] top-[2%] md:right-[-13%] md:top-[18%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[20%]">
+              <div className="flex flex-col justify-center relative right-[-6%] top-[2%] md:right-[-13%] md:top-[18%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[20%] ">
                 <div className="flex flex-wrap w-[51vw] md:w-[48vw] xl:w-[30vw] lg:w-[35vw]">
                   {
                     myBlog.healthLabels.map((val, index) => {
