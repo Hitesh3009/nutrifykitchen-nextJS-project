@@ -20,7 +20,7 @@ const Navbar = () => {
                 </div>
                 {
                     isDropdownOpen && (<div>
-                        <ul className="lg:hidden bg-gray-600 text-white block p-4 text-xl">
+                        <ul className="lg:hidden bg-gray-600 text-white block p-4 text-lg">
                         <Link href='/' className={pathname==='/'?'bg-red-500 rounded-lg block':''}><li className="hover:underline px-2.5 py-2">Home</li></Link>
                         <Link href='/about' className={pathname==='/about'?'bg-red-500 rounded-lg block':''}><li className="hover:underline px-2.5 py-2">About</li></Link>
                         <Link href='/blogs' className={pathname==='/blogs'?'bg-red-500 rounded-lg block':''}><li className="hover:underline px-2.5 py-2">Blogs</li></Link>

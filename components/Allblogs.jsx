@@ -45,12 +45,12 @@ const Allblogs = () => {
             console.log('Some error occurred while saving recipes:', err);
         }
     };
-    const postRecipe=async()=>{
-        const res= await fetch('api/postblog',{
+    const postRecipe = async () => {
+        const res = await fetch('api/postblog', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         });
-        const data=await res.json();
+        const data = await res.json();
         return data;
     }
     const getUserQuery = (e) => {
@@ -72,14 +72,14 @@ const Allblogs = () => {
         <>
             <div className="blogs flex flex-col items-center flex-wrap space-x-5 space-y-3 p-5">
                 <p></p>
-                <form className="recipeName flex items-center space-x-5">
+                <form className="recipeName flex flex-col md:flex-row items-center md:space-x-5 md:space-y-0 space-y-6">
                     <div className='flex flex-col text-center'>
-                        <label htmlFor="recipe" className='text-xl font-bold'>Enter Recipe Name Here</label>
-                        <input type="text" name="recipe" className='w-[30vw] outline-none border-2 border-black rounded-md h-9 pl-3' onChange={getUserQuery} value={query} />
+                        <label htmlFor="recipe" className='text-base md:text-xl font-bold'>Enter Recipe Name Here</label>
+                        <input type="text" name="recipe" className='max-w-[70vw] sm:w-[40vw] md:w-[28.5vw] lg:w-[25vw] outline-none border-2 border-black rounded-md h-9 pl-3 mt-2' onChange={getUserQuery} value={query} />
                     </div>
                     {query && <div className='flex flex-col text-center'>
-                        <label htmlFor="recipe" className='text-xl font-bold'>Cuisine Type</label>
-                        <select name="cuisineType" onChange={getUserCuisine} className='w-[20vw] outline-none border-2 border-black rounded-md h-9'>
+                        <label htmlFor="recipe" className='text-base md:text-xl font-bold'>Cuisine Type</label>
+                        <select name="cuisineType" onChange={getUserCuisine} className='mt-2 max-w-[60vw] sm:w-[40vw] md:w-[23vw] lg:w-[20vw] outline-none border-2 border-black rounded-md h-9'>
                             <option selected>Indian</option>
                             {
                                 cuisineArr.map((val, index) => {
@@ -92,29 +92,30 @@ const Allblogs = () => {
                     </div>}
                 </form>
             </div>
-            <div className='flex flex-wrap justify-evenly p-3'>
+            <div className='flex flex-wrap flex-col items-center pl-5 pt-3 space-y-4 md:space-y-0 mb-6 md:flex-row md:justify-evenly'>
                 {
-                    
                     (recipeData && !isDataEmpty) ? recipeData.map((item, index) => {
                         return (<>
-                            <div className='card border-2 border-black w-[21%] h-[52vh] mb-5 flex flex-col items-center pt-5 'key={index}>
-                                <div className='recipeimg w-10/12 h-[52%]'>
-                                    <img src={item.recipe.image} alt='Recipe Image' className='w-full h-full' />
-                                </div>
-                                <div className='flex w-10/12 flex-grow'>
-                                    <Link href={`/blogpost/${item.recipe.label.replace(/[ ,:;]+/g, '-')}`}><span className='text-sm font-light w-full justify-start'>{item.recipe.label}</span></Link>
-                                </div>
-                                <div className="recipeInfo w-10/12 mb-1">
-                                    <hr className='border-2 border-gray-300 w-full' />
-                                    <div className='flex justify-center p-3'>
-                                        <span className='relative right-5'>Calories:{Math.round(item.recipe.calories)}</span>
-                                        <span>&nbsp;|&nbsp;</span>
-                                        <span className='relative left-5'>Ingredients:{item.recipe.ingredients.length}</span>
+                            <div className="card border-2 border-black w-[15rem] sm:w-64 flex flex-col">
+                                <div className='flex p-5 flex-col items-center'>
+                                    <div className="imageContainer flex justify-center sm:w-1/3 ">
+                                        <img src={item.recipe.image} alt="Recipe Image" className='max-w-56 max-h-48 sm:max-w-60 sm:max-h-44' />
                                     </div>
-                                    <hr className='border-2 border-gray-300 w-full' />
+                                    <div className="imageContainer flex justify-center">
+                                        <Link href={`/blogpost/${item.recipe.label.replace(/[ ,:;]+/g, '-')}`}><span className='text-xs sm:text-sm text-center font-semibold md:text-base'>{item.recipe.label}</span></Link>
+                                    </div>
                                 </div>
-                                <div className="recipeSource mb-2">
-                                    <span className='hover:text-green-500 cursor-pointer'>{item.recipe.source}</span>
+                                <div className='mb-2 mx-1'>
+                                    <hr className='border-2 border-gray-300' />
+                                    <div className='flex justify-evenly items-center my-1 sm:my-1.5 md:my-2'>
+                                        <span className='text-xs sm:text-sm md:text-base'>Calories : {Math.round(item.recipe.calories)}</span>
+                                        <span>&nbsp; | &nbsp;</span>
+                                        <span className='text-xs sm:text-sm md:text-base'>Ingredients : {item.recipe.ingredients.length}</span>
+                                    </div>
+                                    <hr className='border-2 border-gray-300' />
+                                    <div className="source flex justify-center mt-1">
+                                        <span className='text-xs sm:text-sm md:text-base font-bold cursor-pointer hover:underline text-blue-500'><a href={recipeData[0].recipe.url}>{recipeData[0].recipe.source}</a></span>
+                                    </div>
                                 </div>
                             </div>
                         </>)

@@ -1,6 +1,5 @@
 import Allblogs from '@/components/Allblogs';
 import Navbar from '@/components/Navbar'
-import Link from 'next/link'
 
 export async function getBlogsFromServer(){
     const res= await fetch('http://localhost:3000/api/blogs?q={}',{
@@ -15,8 +14,7 @@ const BlogsPage = async() => {
   return (
     <>
       <Navbar />
-      <Allblogs/>
-      
+      <Allblogs/>     
     </>
   )
 }
