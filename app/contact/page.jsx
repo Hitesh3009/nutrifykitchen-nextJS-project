@@ -37,19 +37,19 @@ const ContactPage = () => {
         <>
             <Navbar />
             <div className='outerContainer flex items-center justify-center pt-5 md:pt-12'>
-                <form className='innerContainer border-2 border-gray-400 px-8 md:px-16 py-4 md:py-8 ' onSubmit={handleContactSubmit}>
+                <form className='innerContainer border-2 border-gray-400 px-8 md:px-16 py-4 md:py-8 text-white' onSubmit={handleContactSubmit}>
                     <div className="contactDetails flex flex-col space-y-2">
                         <h1 className='font-bold text-xl md:text-3xl text-center'>Contact Us</h1>
                         <hr className='border-2 border-gray-500'/>
                         <p></p>
                         <label htmlFor="name">Name</label>
-                        <input type="text" name="name" id="name" className='input_bottom_line' value={name} onChange={handleOnchange}/>
+                        <input type="text" name="name" id="name" className='input_bottom_line pl-3 text-black' value={name} onChange={handleOnchange}/>
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" className='input_bottom_line' value={email} onChange={handleOnchange}/>
+                        <input type="email" name="email" id="email" className='input_bottom_line pl-3 text-black' value={email} onChange={handleOnchange}/>
                         <label htmlFor="phone">Phone</label>
-                        <input type="tel" name="phone" id="phone" className='input_bottom_line' value={phone} onChange={handleOnchange}/>
+                        <input type="tel" name="phone" id="phone" className='input_bottom_line pl-3 text-black' value={phone} onChange={handleOnchange}/>
                         <label htmlFor="concern">Concern</label>
-                        <textarea name="desc" id="desc" rows={5} className='input_bottom_line' placeholder='Elaborate your concern here' value={desc} onChange={handleOnchange}/>
+                        <textarea name="desc" id="desc" rows={5} className='input_bottom_line pl-3 text-black' placeholder='Elaborate your concern here' value={desc} onChange={handleOnchange}/>
                         <center><button className='bg-blue-600 text-white px-5 py-1.5 rounded-md mt-2'>Submit</button></center>
                     </div>
                 </form>

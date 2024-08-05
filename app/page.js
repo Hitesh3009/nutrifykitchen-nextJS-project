@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-screen flex-col items-center pt-16 bg-[url('https://getwallpapers.com/wallpaper/full/2/a/f/1224070-most-popular-plain-hd-wallpapers-1920x1080.jpg')] bg-no-repeat bg-cover">
+      <main className="flex min-h-screen flex-col items-center pt-16 ">
         <div className="flex flex-col items-center space-y-5">
           <h2 className="font-bold text-2xl lg:text-3xl xl:text-5xl text-center text-white">NUTRIFY KITCHEN</h2>
           <div className="imageWrap w-96 h-72 relative">
