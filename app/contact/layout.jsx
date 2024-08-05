@@ -7,9 +7,5 @@ export const metadata = {
 };
 
 export default function ContactLayout({ children }) {
-    return (
-        <html lang="en">
-            <body className={`${inter.className} bg-[url('https://t4.ftcdn.net/jpg/02/68/80/71/360_F_268807166_oPVMMlJcxy4OjBDkl9JPxqfJeMC98yNm.jpg')] bg-no-repeat bg-cover`}>{children}</body>
-        </html>
-    );
+    return <section>{children}</section>;
 }

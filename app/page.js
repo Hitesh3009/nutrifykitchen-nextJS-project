@@ -1,11 +1,9 @@
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 export default function Home() {
 
   return (
     <>
-      <Navbar />
       <main className="flex min-h-screen flex-col items-center pt-16 ">
         <div className="flex flex-col items-center space-y-5">
           <h2 className="font-bold text-2xl lg:text-3xl xl:text-5xl text-center text-white">NUTRIFY KITCHEN</h2>

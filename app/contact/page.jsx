@@ -1,5 +1,4 @@
 "use client";
-import Navbar from '@/components/Navbar'
 import React, { useState } from 'react'
 
 const ContactPage = () => {
@@ -45,7 +44,6 @@ const ContactPage = () => {
     }
     return (
         <>
-            <Navbar />
             <div className='outerContainer flex items-center justify-center pt-5 md:pt-12 pb-[5.7rem]'>
                 <form className='innerContainer border-2 border-gray-400 px-8 md:px-16 py-4 md:py-8 text-white' onSubmit={handleContactSubmit}>
                     <div className="contactDetails flex flex-col space-y-2">

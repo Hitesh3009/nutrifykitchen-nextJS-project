@@ -7,14 +7,5 @@ export const metadata = {
 };
 
 export default function AboutLayout({ children }) {
-    const bgImageUrl = "/MainBg.jpg";
-    return (
-        <html lang="en">
-            <body className={`${inter.className}`} style={{
-          backgroundImage: `url(${bgImageUrl})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}>{children}</body>
-        </html>
-    );
+    return <section>{children}</section>;
 }

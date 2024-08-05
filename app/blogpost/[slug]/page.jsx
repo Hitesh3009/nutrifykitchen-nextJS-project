@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 // Fetches the particular blog based on the slug
@@ -17,11 +16,10 @@ export default async function Blogpost({ params }) {
   // Gets the slug from the url params and passes it to the getMyBlog function
   const slug = params.slug;
   const myBlog = await getMyBlog(slug);
-  const blogImg = myBlog.images.REGULAR.url
 
   return (<>
 
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen text-white">
       {/* Checks for whether the blog is available or not and displays the 404 error message */}
       {myBlog.error ? (<>
         <div className="flex flex-grow">
@@ -30,12 +28,11 @@ export default async function Blogpost({ params }) {
       </>)
         :
         (<>
-          <Navbar />
           {/* Displays the blog content */}
           <div className="main flex justify-center flex-col items-center space-y-4 pb-5">
             <div className="container flex flex-col items-center md:items-stretch md:flex-row md:justify-start mt-6 w-10/12 md:w-10/12 xl:w-6/12 lg:w-7/12 p-4 border-2 border-gray-400">
               <div className="Imgcontainer border-[3.5px] border-gradient relative w-56 h-44 md:w-48 md:h-48 lg:w-52 lg:h-52 flex">
-                <Image src={blogImg} fill alt="Recipe Image" priority={true} sizes="auto"/> {/*Blog Image */}
+                <Image src={myBlog.images.SMALL.url} fill alt="Recipe Image" priority={true} sizes="auto" className="text-white"/> {/*Blog Image */}
               </div>
               <div className="source relative md:absolute right-[-5%] md:right-[14%] lg:right-[27%] flex flex-col">
                 <span className=" text-xs xl:text-xl md:text-sm lg:text-base text-green-600">{myBlog.source}</span> {/*Recipe Source */}
@@ -49,7 +46,7 @@ export default async function Blogpost({ params }) {
                   </a>
                 </span>
               </div>
-              <div className="flex flex-col justify-center relative right-[-6%] top-[2%] md:right-[-13%] md:top-[18%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[20%] ">
+              <div className="flex flex-col justify-center relative right-[-6%] top-[2%] md:right-[-13%] md:top-[18%] lg:right-[-4.5%] lg:top-[20%] xl:right-[-7.4%] xl:top-[20%] mt-3 md:mt-10">
                 <div className="flex flex-wrap w-[51vw] md:w-[48vw] xl:w-[30vw] lg:w-[35vw]">
                   {
                     // Iterates the recipe healthlabels array

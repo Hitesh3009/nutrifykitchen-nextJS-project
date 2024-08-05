@@ -1,5 +1,4 @@
 "use client";
-import Navbar from '@/components/Navbar'
 import React, { useEffect, useState } from 'react'
 
 const AboutPage = () => {
@@ -14,7 +13,6 @@ const AboutPage = () => {
     }
     return (
         <>
-            <Navbar />
             <div className='flex justify-center mainContainer'>
                 <div className='text-white flex flex-col w-[70vw] md:w-[50vw] text-justify space-y-7 mt-5 mb-5'>
 

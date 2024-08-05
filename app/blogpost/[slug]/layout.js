@@ -7,9 +7,5 @@ export const metadata = {
 };
 
 export default function RecipeBlogLayout({ children }) {
-    return (
-        <html lang="en">
-            <body className={`${inter.className}`}>{children}</body>
-        </html>
-    );
+    return <section >{children}</section>;
 }
