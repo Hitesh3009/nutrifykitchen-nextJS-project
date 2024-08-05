@@ -1,7 +1,17 @@
+"use client";
 import Navbar from '@/components/Navbar'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const AboutPage = () => {
+    const[isCompMounted,setCompMounted] =useState(false);
+
+    useEffect(()=>{
+        setCompMounted(true);
+    },[]);
+
+    if(!isCompMounted){
+        return null;
+    }
     return (
         <>
             <Navbar />

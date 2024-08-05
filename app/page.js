@@ -40,7 +40,7 @@ export default function Home() {
             </div>
             <div className="blogsItems p-5">
               <div className="relative w-60 h-56">
-                <Image src='/Watermelon.webp' fill sizes="auto" priority={true} alt='Food Images'/>
+                <Image src='/Noodles.jpeg' fill sizes="auto" priority={true} alt='Food Images'/>
               </div>
             </div>
 
