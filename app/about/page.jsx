@@ -1,16 +1,7 @@
-"use client";
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const AboutPage = () => {
-    const[isCompMounted,setCompMounted] =useState(false);
 
-    useEffect(()=>{
-        setCompMounted(true);
-    },[]);
-
-    if(!isCompMounted){
-        return null;
-    }
     return (
         <>
             <div className='flex justify-center mainContainer'>
