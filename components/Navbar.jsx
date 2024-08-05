@@ -10,7 +10,7 @@ const Navbar = () => {
     const pathname=usePathname();
     return (
         <>
-            <nav className="bg-gray-800">
+            <nav className="bg-gray-400">
                 <div id="hamburger" className="p-3 lg:hidden flex space-x-5 items-center text-white">
                     <button onClick={toggleDropDown} className='mt-2'>
                         <div className="border-2 rounded-lg border-white w-10 mb-2"><hr /></div>
