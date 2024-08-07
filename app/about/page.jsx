@@ -7,6 +7,7 @@ const AboutPage = () => {
             <div className='flex justify-center mainContainer'>
                 <div className='text-white flex flex-col w-[70vw] md:w-[50vw] text-justify space-y-7 mt-5 mb-5'>
 
+                    <h1 className='text-4xl md:text-5xl text-center text-yellow-500 tracking-wide'>About Us</h1>
                     <h1 className='text-3xl md:text-4xl underline'>Introduction</h1>
                     <p className='text-base md:text-xl pl-5'>Welcome to Nutrify Kitchen, your go-to destination for discovering a wide variety of recipes, complete with detailed nutritional information and source links for full recipes. Our mission is to make cooking easier and healthier by providing you with all the information you need to prepare delicious meals right at your fingertips.</p>
 

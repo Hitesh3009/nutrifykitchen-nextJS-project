@@ -15,7 +15,7 @@ const Navbar = () => {
     return (
         <>
             {/* Opens Navbar for the small width screen and hides for larger ones*/}
-            <nav className="bg-gray-400 top-0">
+            <nav className="bg-gray-400 ">
                 <div id="hamburger" className="p-3 lg:hidden flex space-x-5 items-center text-white">
                     <button onClick={toggleDropDown} className='mt-2'>
                         <div className="border-2 rounded-lg border-white w-10 mb-2"><hr /></div>
